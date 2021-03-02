@@ -1,0 +1,143 @@
+\documentclass[10pt, a4paper]{article}
+
+\input{cv-themes/theme_selection.tex}
+
+%----------------------------------------------------------------------------------------
+%	 THEMES
+%----------------------------------------------------------------------------------------
+
+% Define the desired theme out of the following: beige, blue, bw, gray, minimal
+% See screenshots in preview/ directory
+\theme{minimal}
+
+%----------------------------------------------------------------------------------------
+%	 PERSONAL INFORMATION
+%----------------------------------------------------------------------------------------
+
+% If you don't need a particular field, just remove the content leaving the command, e.g. \aboutdesc{}
+
+\name{Name Surname} % Your name
+\jobtitle{Job Title} % Job title/career
+\profilepic{dummy_pp.jpg} % Profile picture
+\aboutdesc{Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.} % Description for ABOUT ME section
+\location{City, State} % Address/location
+\phone{080-3345-443} % Phone number
+\mail{email@domain.com} % Mail
+\dateofbirth{22 May 1990} % Date of birth
+\drivinglicenses{Category B} % Drivers license category
+\linkedin{\href{https://www.linkedin.com/home}{linkedin.com/your-profile}} % \linkedin{\href{LINK}{DESCRIPTION}}
+\github{\href{https://github.com/}{github.com/your-profile}} % \github{\href{{LINK}{DESCRIPTION}}
+
+%----------------------------------------------------------------------------------------
+%	 SKILLS
+%----------------------------------------------------------------------------------------
+
+% Both proskills and perskills can be used separately or together. If you do not plan to use professional and personal skill charts, just remove the content leaving the command, e.g. \perskills{} or \proskills{}
+
+% Define professional skills (values are from interval [0,1])
+\proskills{{PHP/0.9},{Java/0.7},{Python/0.45}}
+%\proskills{}
+
+% Define personal skills (values are from interval [0,1])
+\perskills{{Communication skills/0.8},{Team Work/0.7}}
+%\perskills{}
+
+% Define language skills (values are from interval [0,5). If you do not plan to use the language skills chart, just remove the content leaving the command, e.g. \langskills{}
+% Language skill circles are designed to be included into the sidebar
+\langskills{{English/5},{German/3}}
+%\langskills{}
+
+\begin{document}
+
+\makeprofile % Print name & job description. Also prints out profile picture if it's supported by the theme
+
+\begin{paracol}{2}
+
+%----------------------------------------------------------------------------------------
+%	 SIDEBAR
+%----------------------------------------------------------------------------------------
+% Use \subsection inside the sidebar
+
+\subsection{CONTACT}
+\makecontact % Print defined contact information
+
+\subsection{DATE OF BIRTH}
+\makedob
+
+\subsection{ABOUT ME}
+\makeabout
+
+\subsection{DRIVING LICENSE}
+\makelicense
+
+\subsection{LANGUAGES}
+\langcircles % Command for drawing language skill circles
+
+\subsection{PERSONAL}
+\perskills % Command for drawing personal skill bars.
+
+%\subsection{PROFESSIONAL}
+%\proskills % Command for drawing professional skill bars.
+
+%----------------------------------------------------------------------------------------
+%	 BODY
+%----------------------------------------------------------------------------------------
+% Use \section inside the body
+\switchcolumn[1] % This command is used to switch to the right column (document body)
+
+\section{WORK EXPERIENCE}
+
+% \begin{cvitem}{Job title}{Company name}{Location}{Duration}
+% Job description
+% \end{cvitem}
+% To add bullets inside the job description:
+% \begin{cvitem}{Job title}{Company name}{Location}{Duration}
+%   \begin{itemize}
+%       \item 
+%   \end{itemize}
+% \end{cvitem}
+
+\begin{cvitem}{Job title}{Company}{Location}{Duration}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    \begin{itemize}
+        \item Lorem ipsum dolor sit amet
+    \end{itemize}
+\end{cvitem}
+
+\section{EDUCATION}
+
+% \begin{cvitem}{Education level}{College/High school}{Location}{Duration}
+% Description
+% \end{cvitem}
+
+\begin{cvitem}{Masters degree}{College/High school}{Location}{2010-2014}
+    Lorem ipsum dolor sit amet.
+\end{cvitem}
+
+\section{LANGUAGES}
+
+\begin{langs}
+%   \langsitem{Language}{Native} % Optionally add \cline{2-3} after a row to insert a semi-line between languages
+    \langsitem{English}{Native} \cline{2-3}
+%   \langsitemmulti{Language}{Understanding level}{Speaking level}{Writing level}
+    \langsitemmulti{German}{B1}{B2}{B1}
+\end{langs}
+
+\cefrdesc % Use this to add CEFR description, otherwise delete or comment it out
+
+\section{PROJECTS}
+
+% \begin{projitem}{Project name}{\href{link}{link description}}
+% Project description
+% \end{projitem}
+
+\begin{projitem}{Project name}{\href{https://link}{project link}}
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+\end{projitem}
+
+% Use \skillsbars to draw professional skill bars next to the personal skill bars
+% \skillsbars{NAME FOR PROFESSIONAL SKILLS SECTION}{NAME FOR PROFESSIONAL SKILLS SECTION}
+\skillsbars{PROFESSIONAL}{PERSONAL}
+
+\end{paracol}
+\end{document}
