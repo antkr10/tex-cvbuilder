@@ -1,0 +1,69 @@
+% Colors
+\definecolor{pagebackground}{HTML}{FFFFFF}
+\definecolor{headercolor}{HTML}{2F374B}
+\definecolor{sidebartitle}{HTML}{6c6c6d}
+\definecolor{sidebartext}{HTML}{6c6c6d}
+\definecolor{bodytitle}{HTML}{6c6c6d}
+\definecolor{bodytext}{HTML}{6c6c6d}
+\definecolor{bulletcolor}{HTML}{6c6c6d}
+\definecolor{linkcolor}{HTML}{2F374B}
+\definecolor{linecolor}{HTML}{ADA080}
+\definecolor{name}{HTML}{ADA080}
+\definecolor{jobtitle}{HTML}{ADA080}
+\RequirePackage[pagecolor=pagebackground, nopagecolor=pagebackground]{pagecolor}
+
+% Defining font styles
+\newcommand{\sname}{\color{name}\fontsize{46pt}{46pt}\sffamily\addfontfeature{LetterSpace=3}\MakeUppercase}
+\newcommand{\sjobtitle}{\color{jobtitle}\fontsize{22}{22}\sffamily\addfontfeature{LetterSpace=10}\MakeUppercase}
+
+% Defining page styles
+\pagestyle{fancy}
+\fancypagestyle{firstpagestyle}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+    \fancyhead[C]{%
+        \begin{tikzpicture}[remember picture,overlay]
+            \node [rectangle, fill=headercolor, anchor=north west, minimum width=\paperwidth+1cm, minimum height=6.5cm] (box) at ($(current page.north west)+(-1cm,1cm)$) {};
+        \end{tikzpicture}
+    }
+}
+
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Default text color
+\AtBeginDocument{\colorlet{defaultcolor}{.}}
+\color{bodytext}
+
+% Layout for name, job title and sidebar
+\newcommand{\makeprofile}{
+    \thispagestyle{firstpagestyle}
+    \begin{center}
+        \begin{spacing}{2}
+            {\sname\name}
+
+            \medskip
+            {\sjobtitle\jobtitle}
+        \end{spacing}
+    \end{center}
+}
+
+\newcommand{\makecontact}{%
+    \vspace*{1cm}
+    \renewcommand{\arraystretch}{1.2}%
+    \begin{center}
+        \begin{tabularx}{\textwidth}{CCC}
+            \ifthenelse{\equal{\location}{}}{}{\locicon\ \location } &
+            \ifthenelse{\equal{\phone}{}}{}{\phoneicon\ \phone } &
+            \ifthenelse{\equal{\mail}{}}{}{\mailicon\ \href{mailto:\mail}{\mail} } \\
+        \end{tabularx}
+    \end{center}
+
+    \noindent{\color{linecolor}{\rule{\textwidth}{1pt}}}
+    \letterspace
+}
+
+% Margins
+\RequirePackage[left=1.5cm, right=1.5cm, top=1.5cm, bottom=1.5cm, footskip=0.5cm, headheight=0.5cm]{geometry}

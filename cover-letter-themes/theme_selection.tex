@@ -1,0 +1,120 @@
+%----------------------------------------------------------------------------------------
+%	 THEMES
+%----------------------------------------------------------------------------------------
+
+\RequirePackage{etoolbox}
+\RequirePackage{ifthen}
+\RequirePackage{xifthen}
+\newbool{langempty}
+\newbool{proempty}
+\newbool{perempty}
+
+\newcommand{\theme}[1]{
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{bw}}}{
+        \input{cover-letter-themes/bw}}{}
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{gray}}}{
+        \input{cover-letter-themes/gray}}{}
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{minimal}}}{
+        \input{cover-letter-themes/minimal}}{}
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{blue}}}{
+        \input{cover-letter-themes/blue}}{}
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{beige}}}{
+        \input{cover-letter-themes/beige}}{}
+}
+
+%----------------------------------------------------------------------------------------
+%	 FONTS
+%----------------------------------------------------------------------------------------
+
+\RequirePackage[final]{microtype}
+\RequirePackage{fontspec}
+\setmainfont[Path= fonts/,
+	BoldFont = NunitoSans-SemiBold.ttf,
+	ItalicFont = NunitoSans-Italic.ttf]
+{NunitoSans-Regular.ttf}
+
+\setsansfont[Path= fonts/,
+	BoldFont = Archivo-SemiBold.ttf]
+{Archivo-Regular.ttf}
+
+%----------------------------------------------------------------------------------------
+%	 PACKAGES
+%----------------------------------------------------------------------------------------
+
+\RequirePackage{tikz}
+\usetikzlibrary{calc, positioning}
+\RequirePackage{xcolor}
+\RequirePackage{parskip}
+\RequirePackage{setspace}
+\RequirePackage{tabularx}
+\RequirePackage{multirow}
+\RequirePackage[fixed]{fontawesome5}
+\RequirePackage[nobottomtitles]{titlesec}
+\RequirePackage{graphicx}
+\RequirePackage{enumitem}
+\RequirePackage{fancyhdr}
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{paracol}
+\RequirePackage{booktabs}
+\RequirePackage{lipsum}
+\setstretch{1.2}
+
+%----------------------------------------------------------------------------------------
+%	 MISC CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt} % Disable paragraph indentation
+\setlength{\parskip}{6pt} % Space between paragraphs
+\emergencystretch 3em
+
+% Graphics directories
+\graphicspath{{../images/}{images/}}
+
+%----------------------------------------------------------------------------------------
+%	 COMMANDS
+%----------------------------------------------------------------------------------------
+
+% Define custom commands for cover letter
+\newcommand{\jobtitle}[1]{\renewcommand{\jobtitle}{#1}}
+\newcommand{\name}[1]{\renewcommand{\name}{#1}}
+\newcommand{\location}[1]{\renewcommand{\location}{#1}}
+\newcommand{\phone}[1]{\renewcommand{\phone}{#1}}
+\newcommand{\mail}[1]{\renewcommand{\mail}{#1}}
+\newcommand{\profilepic}[1]{\renewcommand{\profilepic}{#1}}
+\newcommand{\employerinfo}[1]{\renewcommand{\employerinfo}{#1}}
+\newcommand{\letterspace}{\vspace*{\baselineskip}}
+\newcommand{\makeabout}{\ifthenelse{\equal{\aboutdesc}{}}{}{\aboutdesc}}
+\newcommand{\makedob}{\ifthenelse{\equal{\dateofbirth}{}}{}{\dateofbirth}}
+\newcommand{\makelicense}{\ifthenelse{\equal{\drivinglicenses}{}}{}{\drivinglicenses}}
+\newcommand{\makeemployerinfo}{\ifthenelse{\equal{\employerinfo}{}}{}{%
+    \employerinfo
+    \letterspace
+}}
+
+% Defining icons
+\newcommand{\phoneicon}{\small{\faPhone*}}
+\newcommand{\locicon}{\faMapMarker*}
+\newcommand{\mailicon}{\faEnvelope}
+\newcommand{\githubicon}{\faGithub}
+\newcommand{\linkedinicon}{\faLinkedin}
+
+% Defining table column types
+\newcolumntype{Y}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{R}[1]{>{\arraybackslash\raggedright}m{#1}}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\newcolumntype{L}[1]{>{\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+
+% Bullet style and spacing
+\setlist[itemize,1]{label={\color{bulletcolor}$\bullet$},parsep=6pt,labelindent=12pt}
+\setlist[itemize,2]{label={\color{bulletcolor}$\bullet$},parsep=6pt,labelindent=12pt}
+\setlist[itemize,3]{label={\color{bulletcolor}$\bullet$},parsep=6pt,labelindent=12pt}
+
+% Links
+\RequirePackage[bookmarks=false, colorlinks]{hyperref}
+\hypersetup{linkcolor=linkcolor, urlcolor=linkcolor}
+\makeatletter
+\def\Hy@href#{%
+  \addfontfeatures{Color=linkcolor}\hyper@normalise\href@
+}
+\makeatother

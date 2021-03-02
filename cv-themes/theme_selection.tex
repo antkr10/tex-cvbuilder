@@ -1,0 +1,222 @@
+%----------------------------------------------------------------------------------------
+%	 THEMES
+%----------------------------------------------------------------------------------------
+
+\RequirePackage{etoolbox}
+\RequirePackage{ifthen}
+\RequirePackage{xifthen}
+\newbool{langempty}
+\newbool{proempty}
+\newbool{perempty}
+
+\newcommand{\theme}[1]{
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{bw}}}{
+        \input{cv-themes/bw.tex}}{}
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{gray}}}{
+        \input{cv-themes/gray.tex}}{}
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{minimal}}}{
+        \input{cv-themes/minimal.tex}}{}
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{blue}}}{
+        \input{cv-themes/blue.tex}}{}
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{beige}}}{
+        \input{cv-themes/beige.tex}}{}
+}
+
+%----------------------------------------------------------------------------------------
+%	 FONTS
+%----------------------------------------------------------------------------------------
+
+\RequirePackage[final]{microtype}
+\RequirePackage{fontspec}
+\setmainfont[Path= fonts/,
+	BoldFont = NunitoSans-SemiBold.ttf,
+	ItalicFont = NunitoSans-Italic.ttf]
+{NunitoSans-Regular.ttf}
+
+\setsansfont[Path= fonts/,
+	BoldFont = Archivo-SemiBold.ttf]
+{Archivo-Regular.ttf}
+
+%----------------------------------------------------------------------------------------
+%	 PACKAGES
+%----------------------------------------------------------------------------------------
+
+\RequirePackage{tikz}
+\usetikzlibrary{calc, positioning}
+\RequirePackage{xcolor}
+\RequirePackage{parskip}
+\RequirePackage{setspace}
+\RequirePackage{tabularx}
+\RequirePackage{multirow}
+\RequirePackage[fixed]{fontawesome5}
+\RequirePackage{progressbar}
+\RequirePackage[nobottomtitles]{titlesec}
+\RequirePackage{graphicx}
+\RequirePackage{enumitem}
+\RequirePackage{fancyhdr}
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{paracol}
+\RequirePackage{booktabs}
+\setstretch{1.2}
+
+%----------------------------------------------------------------------------------------
+%	 MISC CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt} % Disable paragraph indentation
+\setlength{\parskip}{6pt} % Space between paragraphs
+\emergencystretch 3em
+
+% Graphics directories
+\graphicspath{{../images/}{images/}}
+
+%----------------------------------------------------------------------------------------
+%	 COMMANDS
+%----------------------------------------------------------------------------------------
+
+% Custom commands for CV
+\newcommand{\jobtitle}[1]{\renewcommand{\jobtitle}{#1}}
+\newcommand{\name}[1]{\renewcommand{\name}{#1}}
+\newcommand{\aboutdesc}[1]{\renewcommand{\aboutdesc}{#1}}
+\newcommand{\location}[1]{\renewcommand{\location}{#1}}
+\newcommand{\phone}[1]{\renewcommand{\phone}{#1}}
+\newcommand{\mail}[1]{\renewcommand{\mail}{#1}}
+\newcommand{\drivinglicenses}[1]{\renewcommand{\drivinglicenses}{#1}}
+\newcommand{\github}[1]{\renewcommand{\github}{#1}}
+\newcommand{\linkedin}[1]{\renewcommand{\linkedin}{#1}}
+\newcommand{\dateofbirth}[1]{\renewcommand{\dateofbirth}{#1}}
+\newcommand{\profilepic}[1]{\renewcommand{\profilepic}{#1}}
+\newcommand{\aboutme}[1]{\renewcommand{\aboutme}{#1}}
+\newcommand{\makeabout}{\ifthenelse{\equal{\aboutdesc}{}}{}{\aboutdesc}}
+\newcommand{\makedob}{\ifthenelse{\equal{\dateofbirth}{}}{}{\dateofbirth}}
+\newcommand{\makelicense}{\ifthenelse{\equal{\drivinglicenses}{}}{}{\drivinglicenses}}
+\newcommand{\langcircles}{\ifboolexpr{bool {langempty}}{}{\langskills}}
+\newcommand{\sitemtit}{\color{bodytext}\sffamily\MakeUppercase}
+\newcommand{\sitemsub}{\color{bodytext}\normalfont\itshape}
+
+% Icons
+\newcommand{\phoneicon}{\small{\faPhone*}}
+\newcommand{\locicon}{\faMapMarker*}
+\newcommand{\mailicon}{\faEnvelope}
+\newcommand{\githubicon}{\faGithub}
+\newcommand{\linkedinicon}{\faLinkedin}
+
+% Table column types
+\newcolumntype{Y}[1]{>{\arraybackslash\centering}m{#1}}
+\newcolumntype{L}[1]{>{\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+
+% CEFR description
+\newcommand{\cefrdesc}{
+	\renewcommand{\arraystretch}{1}{\footnotesize{%
+    	\begin{tabular*}{\textwidth}{@{}p{\widthof{* }}@{}L{9cm}}
+            * & A1/A2: Basic, B1/B2: Independent, C1/C2: Proficient \\
+            & \href{https://europass.cedefop.europa.eu/resources/european-language-levels-cefr}{Common European Framework of Reference for Languages} \\
+    	\end{tabular*}%
+    }}
+}
+
+% Language environments
+\newenvironment{langs}{%
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabular*}{\textwidth}{@{}L{4cm}L{4cm}L{1cm}}
+}{%
+	\end{tabular*}
+}
+
+\newcommand{\langsitem}[2]{%
+	\sitemtit{#1} & {#2} & \\
+}
+
+\newcommand{\langsitemmulti}[4]{%
+	\sitemtit{\multirow{3}{*}{#1}} & Understanding & {#2} \\
+	& Speaking & {#3} \\
+	& Writing & {#4} \\
+}
+
+% Contact table
+\newcommand{\makecontact}{\vspace{-5pt}\renewcommand{\arraystretch}{1.2}%
+    \begin{tabular}[t]{@{}Y{.1\columnwidth} @{\hskip 0.05\columnwidth}p{0.85\columnwidth}}
+        \ifthenelse{\equal{\location}{}}{}{\locicon & \location \\ }
+        \ifthenelse{\equal{\phone}{}}{}{\phoneicon & \phone \\ }
+        \ifthenelse{\equal{\mail}{}}{}{\mailicon & \href{mailto:\mail}{\mail} }
+        \ifthenelse{\equal{\linkedin}{}}{}{\\ \linkedinicon & \linkedin }
+        \ifthenelse{\equal{\github}{}}{}{\\ \githubicon & \github \\ }
+    \end{tabular}
+}
+
+% Environment for listing out work experience and education
+\newenvironment{cvitem}[4]{%
+    {\color{bodytext}{\ifthenelse{\isempty{#1}}{}{\sitemtit{#1,}}} \sitemtit{#2}}\\
+    {\sitemsub{#3 | #4}}\par
+    {}
+}
+
+% Environment for listing out projects
+\newenvironment{projitem}[2]{
+    {\color{bodytext}{\ifthenelse{\isempty{#2}}{\sitemtit{#1}}{\sitemtit{#1 | #2}}}}\par
+    {}
+}
+
+% Bullet style and spacing
+\setlist[itemize,1]{label={\color{bulletcolor}$\bullet$},parsep=6pt,labelindent=12pt}
+\setlist[itemize,2]{label={\color{bulletcolor}$\bullet$},parsep=6pt,labelindent=12pt}
+\setlist[itemize,3]{label={\color{bulletcolor}$\bullet$},parsep=6pt,labelindent=12pt}
+
+% Personal skills bar
+\newcommand\perskills[1]{
+    \ifthenelse{\equal{#1}{}}{\booltrue{perempty}}{\renewcommand{\perskills}{%
+        \foreach [count=\i] \x/\y in {#1}{
+            {\x}\\
+            \progressbar[width=.9\columnwidth,roundnessa=1pt, ticksheight=0, heightr=1, linecolor=bodytext, filledcolor=bodytext, borderwidth=1pt, emptycolor=pagebackground]{\y}\par\smallskip
+            }
+    }}
+}
+
+% Professional skills bar
+\newcommand\proskills[1]{
+    \ifthenelse{\equal{#1}{}}{\booltrue{proempty}}{\renewcommand{\proskills}{%
+        \foreach [count=\i] \x/\y in {#1}{
+            {\x}\\
+            \progressbar[width=.9\columnwidth,roundnessa=1pt, ticksheight=0, heightr=1, linecolor=bodytext, filledcolor=bodytext, borderwidth=1pt, emptycolor=pagebackground]{\y}\par\smallskip
+        }
+    }}
+}
+
+% Command for drawing professional and personal skills
+\newcommand\skillsbars[2]{%
+    \ifboolexpr{bool {proempty} or bool {perempty}}{}{%
+        \begin{minipage}[t]{.45\columnwidth}
+            \section{#1}
+            \proskills
+        \end{minipage}%
+        \hspace{.1\columnwidth}\begin{minipage}[t]{.45\columnwidth}
+            \section{#2}
+            \perskills
+        \end{minipage}
+    }
+}
+
+% Command for drawing language skill circles
+% Adapted from AltaCV Template: https://www.overleaf.com/latex/templates/altacv-template/trgqjpwnmtgv
+\newcommand\langskills[1]{%
+    \ifthenelse{\equal{#1}{}}{\booltrue{langempty}}{\renewcommand{\langskills}{%
+	    \renewcommand{\arraystretch}{1.4}
+        \foreach [count=\i] \x/\y in {#1}{%
+            \begin{tabular*}{\columnwidth}{@{}L{.4\columnwidth}L{.6\columnwidth}}
+                {\x} &
+                \foreach \z in {1,...,5}{%
+                    {\ifnumgreater{\z}{\y}{\color{bodytext!30}}{\color{bodytext}}\small{\faCircle}}}\\
+            \end{tabular*}
+        }
+    }}
+}
+
+% Links
+\RequirePackage[bookmarks=false, colorlinks]{hyperref}
+\hypersetup{linkcolor=linkcolor, urlcolor=linkcolor}
+\makeatletter
+\def\Hy@href#{%
+  \addfontfeatures{Color=linkcolor}\hyper@normalise\href@
+}
+\makeatother
