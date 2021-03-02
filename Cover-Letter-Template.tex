@@ -1,0 +1,60 @@
+\documentclass[10pt, a4paper]{article}
+
+\input{cover-letter-themes/theme_selection}
+
+%----------------------------------------------------------------------------------------
+%	 THEMES
+%----------------------------------------------------------------------------------------
+
+% Define the desired theme out of the following: beige, blue, bw, gray, minimal
+% See screenshots in preview/ directory
+\theme{minimal}
+
+%----------------------------------------------------------------------------------------
+%	 PERSONAL INFORMATION
+%----------------------------------------------------------------------------------------
+
+% If you don't need a particular field, just remove the content leaving the command, e.g. \aboutdesc{}
+
+\name{Name Surname} % Your name
+\jobtitle{Job Title} % Job title/career
+\profilepic{dummy_pp.jpg} % Profile picture
+\location{City, State} % Address/location
+\phone{080-3345-443} % Phone number
+\mail{email@domain.com} % Mail
+\employerinfo{Hiring Manager's Name \\
+912 Company Address \\
+City, State Zip Code \\
+517-444-6098 \\
+hiring.manager@gmail.com} % Contact information of the employer. Make sure to end every row with "\\"
+
+\begin{document}
+
+\makeprofile % Print name & job description. Also prints out profile picture if it's supported by the theme
+
+\makecontact  % Print defined contact information
+
+\today % Command for inserting today's date.
+
+\letterspace % Command for adding larger vertical space
+\makeemployerinfo % Print employer contact information 
+
+Dear Mr./Ms. Lastname,
+
+\lipsum[3][7-10] % Command to generate dummy text
+
+\begin{itemize}
+    \item \lipsum*[1][7-8]
+    \item \lipsum*[6][7-10]
+    \item \lipsum*[5][7-9]
+\end{itemize}
+
+\lipsum[12-13]
+
+\letterspace % Command for adding larger vertical space
+Sincerely,
+
+\letterspace % Command for adding larger vertical space
+Your Name
+
+\end{document}
