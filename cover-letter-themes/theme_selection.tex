@@ -20,6 +20,8 @@
         \input{cover-letter-themes/blue}}{}
     \ifthenelse{\equal{\detokenize{#1}}{\detokenize{beige}}}{
         \input{cover-letter-themes/beige}}{}
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{coral}}}{
+        \input{cover-letter-themes/coral}}{}
 }
 
 %----------------------------------------------------------------------------------------
@@ -29,12 +31,12 @@
 \RequirePackage[final]{microtype}
 \RequirePackage{fontspec}
 \setmainfont[Path= fonts/,
-	BoldFont = NunitoSans-SemiBold.ttf,
-	ItalicFont = NunitoSans-Italic.ttf]
+    BoldFont = NunitoSans-SemiBold.ttf,
+    ItalicFont = NunitoSans-Italic.ttf]
 {NunitoSans-Regular.ttf}
 
 \setsansfont[Path= fonts/,
-	BoldFont = Archivo-SemiBold.ttf]
+    BoldFont = Archivo-SemiBold.ttf]
 {Archivo-Regular.ttf}
 
 %----------------------------------------------------------------------------------------
@@ -115,6 +117,6 @@
 \hypersetup{linkcolor=linkcolor, urlcolor=linkcolor}
 \makeatletter
 \def\Hy@href#{%
-  \addfontfeatures{Color=linkcolor}\hyper@normalise\href@
+    \addfontfeatures{Color=linkcolor}\hyper@normalise\href@
 }
 \makeatother

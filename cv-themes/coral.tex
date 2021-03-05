@@ -1,0 +1,121 @@
+% Colors
+\definecolor{pagebackground}{HTML}{F5F5F5}
+\definecolor{sidebarbackground}{HTML}{353535}
+\definecolor{sidebartitle}{HTML}{FFFFFF}
+\definecolor{sidebartext}{HTML}{FFFFFF}
+\definecolor{bodytitle}{HTML}{353535}
+\definecolor{bodytext}{HTML}{353535}
+\definecolor{bulletcolor}{HTML}{353535}
+\definecolor{linkcolor}{HTML}{EF6F6C}
+\definecolor{linecolor}{HTML}{EF6F6C}
+\definecolor{name}{HTML}{353535}
+\definecolor{jobtitle}{HTML}{353535}
+\RequirePackage[pagecolor=pagebackground, nopagecolor=pagebackground]{pagecolor}
+
+% Heading styles
+\titleformat{\section}
+{\color{bodytitle}\fontsize{16pt}{16pt}\sffamily\addfontfeature{LetterSpace=2}}
+{}{0pt}{}[{\color{linecolor}\titlerule[1pt]}]
+
+\titleformat{\subsection}
+{\color{sidebartitle}\fontsize{16pt}{16pt}\sffamily\addfontfeature{LetterSpace=2}}
+{}{0pt}{}[{\color{linecolor}\titlerule[1pt]}]
+
+\titleformat{\subsubsection}
+{\color{bodytitle}\fontsize{12pt}{12pt}\sffamily\addfontfeature{LetterSpace=2}}
+{}{0pt}{}
+
+\titlespacing*{\section}{0pt}{0.5cm}{0.4cm}
+\titlespacing*{\subsection}{0pt}{0.5cm}{0.4cm}
+\titlespacing*{\subsubsection}{0pt}{0.5cm}{0.1cm}
+
+% Defining font styles
+\newcommand{\sname}{\color{name}\fontsize{40pt}{40pt}\sffamily\addfontfeature{LetterSpace=2}\MakeUppercase}
+\newcommand{\sjobtitle}{\color{jobtitle}\fontsize{18pt}{18pt}\sffamily\addfontfeature{LetterSpace=2}\MakeUppercase}
+
+% Defining page styles
+\pagestyle{fancy}
+\fancypagestyle{firstpagestyle}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+    \fancyhead[C]{%
+        \begin{tikzpicture}[remember picture,overlay]
+            \node [rectangle, fill=sidebarbackground, anchor=north west, minimum width=8cm, minimum height=\paperheight+2cm] (box) at ($(current page.north west)-(1cm,5cm)$) {};
+        \end{tikzpicture}
+    }
+}
+
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[C]{%
+    \begin{tikzpicture}[remember picture,overlay]
+        \node [rectangle, fill=sidebarbackground, anchor=north west, minimum width=8cm, minimum height=\paperheight+2cm] (box) at ($(current page.north west)-(1cm,-1cm)$) {};
+    \end{tikzpicture}
+}
+
+% Layout for name, job title and sidebar
+\setcolumnwidth{5cm,12cm}
+\setlength{\columnsep}{1.5cm}
+\columncolor{sidebartext}[0]
+\columncolor{bodytext}[1]
+
+\newcommand{\makeprofile}{
+    \thispagestyle{firstpagestyle}
+    \begin{center}
+        \begin{spacing}{2}
+            {\sname\name}
+
+            \medskip
+            {\sjobtitle\jobtitle}
+        \end{spacing}
+    \end{center}
+    \vspace*{0.5cm}
+}
+
+% Margins
+\RequirePackage[left=1cm, right=1cm, top=1.5cm, bottom=1.5cm, footskip=0.5cm, headheight=0.5cm]{geometry}
+
+% Personal skills bar
+\newcommand\perskills[1]{
+    \ifthenelse{\equal{#1}{}}{\booltrue{perempty}}{\renewcommand{\perskills}{%
+        \foreach [count=\i] \x/\y in {#1}{
+            {\x}\\
+            \ifthenelse{\equal{\thecolumn}{0}}{
+                \progressbar[width=.9\columnwidth,roundnessa=1pt, ticksheight=0, heightr=1, linecolor=linecolor, filledcolor=linecolor, borderwidth=1pt, emptycolor=sidebarbackground]{\y}\par\smallskip
+                }{
+                \progressbar[width=.9\columnwidth,roundnessa=1pt, ticksheight=0, heightr=1, linecolor=bodytext, filledcolor=bodytext, borderwidth=1pt, emptycolor=pagebackground]{\y}\par\smallskip
+            }
+        }
+    }}
+}
+
+% Professional skills bar
+\newcommand\proskills[1]{
+    \ifthenelse{\equal{#1}{}}{\booltrue{proempty}}{\renewcommand{\proskills}{%
+        \foreach [count=\i] \x/\y in {#1}{
+            {\x}\\
+            \ifthenelse{\equal{\thecolumn}{0}}{
+                \progressbar[width=.9\columnwidth,roundnessa=1pt, ticksheight=0,heightr=1, linecolor=linecolor, filledcolor=linecolor, borderwidth=1pt, emptycolor=sidebarbackground]{\y}\par\smallskip
+                }{
+                \progressbar[width=.9\columnwidth,roundnessa=1pt, ticksheight=0, heightr=1, linecolor=bodytext, filledcolor=bodytext, borderwidth=1pt, emptycolor=pagebackground]{\y}\par\smallskip
+            }
+        }
+    }}
+}
+
+% Command for drawing language skill circles
+% Adapted from AltaCV Template: https://www.overleaf.com/latex/templates/altacv-template/trgqjpwnmtgv
+\newcommand\langskills[1]{%
+    \ifthenelse{\equal{#1}{}}{\booltrue{langempty}}{\renewcommand{\langskills}{%
+        \renewcommand{\arraystretch}{1.4}
+        \foreach [count=\i] \x/\y in {#1}{%
+            \begin{tabular*}{\columnwidth}{@{}L{.4\columnwidth}L{.6\columnwidth}}
+                {\x} &
+                \foreach \z in {1,...,5}{%
+                    {\ifnumgreater{\z}{\y}{\color{sidebarbackground!30}}{\color{linecolor}}\small{\faCircle}}}\\
+            \end{tabular*}
+        }
+    }}
+}

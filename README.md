@@ -46,11 +46,13 @@ Cycle through supported themes by changing the `\theme{<theme>}` variable at the
 * `beige`
 * `blue`
 * `bw`
+* `coral`
 * `gray`
 * `minimal`
 
 ![beige](previews/beige.png)
 ![blue](previews/blue.png)
 ![bw](previews/bw.png)
+![coral](previews/coral.png)
 ![gray](previews/gray.png)
 ![minimal](previews/minimal.png)

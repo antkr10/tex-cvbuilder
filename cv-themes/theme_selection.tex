@@ -20,6 +20,8 @@
         \input{cv-themes/blue.tex}}{}
     \ifthenelse{\equal{\detokenize{#1}}{\detokenize{beige}}}{
         \input{cv-themes/beige.tex}}{}
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{coral}}}{
+        \input{cv-themes/coral.tex}}{}
 }
 
 %----------------------------------------------------------------------------------------
@@ -29,12 +31,12 @@
 \RequirePackage[final]{microtype}
 \RequirePackage{fontspec}
 \setmainfont[Path= fonts/,
-	BoldFont = NunitoSans-SemiBold.ttf,
-	ItalicFont = NunitoSans-Italic.ttf]
+    BoldFont = NunitoSans-SemiBold.ttf,
+    ItalicFont = NunitoSans-Italic.ttf]
 {NunitoSans-Regular.ttf}
 
 \setsansfont[Path= fonts/,
-	BoldFont = Archivo-SemiBold.ttf]
+    BoldFont = Archivo-SemiBold.ttf]
 {Archivo-Regular.ttf}
 
 %----------------------------------------------------------------------------------------
@@ -108,8 +110,8 @@
 
 % CEFR description
 \newcommand{\cefrdesc}{
-	\renewcommand{\arraystretch}{1}{\footnotesize{%
-    	\begin{tabular*}{\textwidth}{@{}p{\widthof{* }}@{}L{9cm}}
+    \renewcommand{\arraystretch}{1}{\footnotesize{%
+        \begin{tabular*}{\textwidth}{@{}p{\widthof{* }}@{}L{9cm}}
             * & A1/A2: Basic, B1/B2: Independent, C1/C2: Proficient \\
             & \href{https://europass.cedefop.europa.eu/resources/european-language-levels-cefr}{Common European Framework of Reference for Languages} \\
     	\end{tabular*}%
@@ -118,20 +120,20 @@
 
 % Language environments
 \newenvironment{langs}{%
-	\renewcommand{\arraystretch}{1.4}
-	\begin{tabular*}{\textwidth}{@{}L{4cm}L{4cm}L{1cm}}
-}{%
-	\end{tabular*}
+    \renewcommand{\arraystretch}{1.4}
+    \begin{tabular*}{\textwidth}{@{}L{4cm}L{4cm}L{1cm}}
+    }{%
+    \end{tabular*}
 }
 
 \newcommand{\langsitem}[2]{%
-	\sitemtit{#1} & {#2} & \\
+    \sitemtit{#1} & {#2} & \\
 }
 
 \newcommand{\langsitemmulti}[4]{%
-	\sitemtit{\multirow{3}{*}{#1}} & Understanding & {#2} \\
-	& Speaking & {#3} \\
-	& Writing & {#4} \\
+    \sitemtit{\multirow{3}{*}{#1}} & Understanding & {#2} \\
+    & Speaking & {#3} \\
+    & Writing & {#4} \\
 }
 
 % Contact table
@@ -163,26 +165,6 @@
 \setlist[itemize,2]{label={\color{bulletcolor}$\bullet$},parsep=6pt,labelindent=12pt}
 \setlist[itemize,3]{label={\color{bulletcolor}$\bullet$},parsep=6pt,labelindent=12pt}
 
-% Personal skills bar
-\newcommand\perskills[1]{
-    \ifthenelse{\equal{#1}{}}{\booltrue{perempty}}{\renewcommand{\perskills}{%
-        \foreach [count=\i] \x/\y in {#1}{
-            {\x}\\
-            \progressbar[width=.9\columnwidth,roundnessa=1pt, ticksheight=0, heightr=1, linecolor=bodytext, filledcolor=bodytext, borderwidth=1pt, emptycolor=pagebackground]{\y}\par\smallskip
-            }
-    }}
-}
-
-% Professional skills bar
-\newcommand\proskills[1]{
-    \ifthenelse{\equal{#1}{}}{\booltrue{proempty}}{\renewcommand{\proskills}{%
-        \foreach [count=\i] \x/\y in {#1}{
-            {\x}\\
-            \progressbar[width=.9\columnwidth,roundnessa=1pt, ticksheight=0, heightr=1, linecolor=bodytext, filledcolor=bodytext, borderwidth=1pt, emptycolor=pagebackground]{\y}\par\smallskip
-        }
-    }}
-}
-
 % Command for drawing professional and personal skills
 \newcommand\skillsbars[2]{%
     \ifboolexpr{bool {proempty} or bool {perempty}}{}{%
@@ -197,26 +179,11 @@
     }
 }
 
-% Command for drawing language skill circles
-% Adapted from AltaCV Template: https://www.overleaf.com/latex/templates/altacv-template/trgqjpwnmtgv
-\newcommand\langskills[1]{%
-    \ifthenelse{\equal{#1}{}}{\booltrue{langempty}}{\renewcommand{\langskills}{%
-	    \renewcommand{\arraystretch}{1.4}
-        \foreach [count=\i] \x/\y in {#1}{%
-            \begin{tabular*}{\columnwidth}{@{}L{.4\columnwidth}L{.6\columnwidth}}
-                {\x} &
-                \foreach \z in {1,...,5}{%
-                    {\ifnumgreater{\z}{\y}{\color{bodytext!30}}{\color{bodytext}}\small{\faCircle}}}\\
-            \end{tabular*}
-        }
-    }}
-}
-
 % Links
 \RequirePackage[bookmarks=false, colorlinks]{hyperref}
 \hypersetup{linkcolor=linkcolor, urlcolor=linkcolor}
 \makeatletter
 \def\Hy@href#{%
-  \addfontfeatures{Color=linkcolor}\hyper@normalise\href@
+    \addfontfeatures{Color=linkcolor}\hyper@normalise\href@
 }
 \makeatother
