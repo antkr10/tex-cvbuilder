@@ -15,20 +15,15 @@
 
 % Defining page styles
 \pagestyle{fancy}
-\fancypagestyle{firstpagestyle}{
-    \fancyhf{}
-    \renewcommand{\headrulewidth}{0pt}
-    \renewcommand{\footrulewidth}{0pt}
-    \fancyhead[C]{%
-        \begin{tikzpicture}[remember picture,overlay]
-            \draw [line width=3pt, color=linecolor] ($(current page.north west)-(0,5cm)$) -- ($(current page.north east)-(0,5cm)$);
-        \end{tikzpicture}
-    }
-}
-
 \fancyhf{}
+
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
+\fancyhead[C]{%
+    \begin{tikzpicture}[remember picture,overlay]
+        \draw [line width=3pt, color=linecolor] ($(current page.north west)-(0,5cm)$) -- ($(current page.north east)-(0,5cm)$);
+    \end{tikzpicture}
+}
 
 % Default text color
 \AtBeginDocument{\colorlet{defaultcolor}{.}}
@@ -36,7 +31,6 @@
 
 % Layout for name, job title and sidebar
 \newcommand{\makeprofile}{
-    \thispagestyle{firstpagestyle}
     \begin{center}
         \begin{spacing}{2}
             {\sname\name}
