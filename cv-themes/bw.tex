@@ -23,7 +23,7 @@
 
 \titleformat{\subsubsection}
 {\color{bodytitle}\fontsize{12pt}{12pt}\sffamily\addfontfeature{LetterSpace=2}}
-{}{0em}{}
+{}{0pt}{}
 
 \titlespacing*{\section}{0pt}{0.5cm}{0.4cm}
 \titlespacing*{\subsection}{0pt}{0.5cm}{0.4cm}
@@ -73,3 +73,47 @@
 
 % Margins
 \RequirePackage[left=1cm, right=1cm, top=1.5cm, bottom=1.5cm, footskip=0.5cm, headheight=0.5cm]{geometry}
+
+% Personal skills bar
+\newcommand\perskills[1]{
+    \ifthenelse{\equal{#1}{}}{\booltrue{perempty}}{\renewcommand{\perskills}{%
+        \foreach [count=\i] \x/\y in {#1}{
+            {\x}\\
+            \ifthenelse{\equal{\thecolumn}{0}}{
+                \progressbar[width=.9\columnwidth,roundnessa=1pt, ticksheight=0, heightr=1, linecolor=sidebartext, filledcolor=sidebarbackground, borderwidth=1pt, emptycolor=pagebackground]{\y}\par\smallskip
+                }{
+                \progressbar[width=.9\columnwidth,roundnessa=1pt, ticksheight=0, heightr=1, linecolor=bodytext, filledcolor=bodytext, borderwidth=1pt, emptycolor=pagebackground]{\y}\par\smallskip
+            }
+        }
+    }}
+}
+
+% Professional skills bar
+\newcommand\proskills[1]{
+    \ifthenelse{\equal{#1}{}}{\booltrue{proempty}}{\renewcommand{\proskills}{%
+        \foreach [count=\i] \x/\y in {#1}{
+            {\x}\\
+            \ifthenelse{\equal{\thecolumn}{0}}{
+                \progressbar[width=.9\columnwidth,roundnessa=1pt, ticksheight=0,
+                heightr=1, linecolor=sidebartext, filledcolor=sidebarbackground, borderwidth=1pt, emptycolor=pagebackground]{\y}\par\smallskip
+                }{
+                \progressbar[width=.9\columnwidth,roundnessa=1pt, ticksheight=0, heightr=1, linecolor=bodytext, filledcolor=bodytext, borderwidth=1pt, emptycolor=pagebackground]{\y}\par\smallskip
+            }
+        }
+    }}
+}
+
+% Command for drawing language skill circles
+% Adapted from AltaCV Template: https://www.overleaf.com/latex/templates/altacv-template/trgqjpwnmtgv
+\newcommand\langskills[1]{%
+    \ifthenelse{\equal{#1}{}}{\booltrue{langempty}}{\renewcommand{\langskills}{%
+        \renewcommand{\arraystretch}{1.4}
+        \foreach [count=\i] \x/\y in {#1}{%
+            \begin{tabular*}{\columnwidth}{@{}L{.4\columnwidth}L{.6\columnwidth}}
+                {\x} &
+                \foreach \z in {1,...,5}{%
+                    {\ifnumgreater{\z}{\y}{\color{bodytext!30}}{\color{bodytext}}\small{\faCircle}}}\\
+            \end{tabular*}
+        }
+    }}
+}
