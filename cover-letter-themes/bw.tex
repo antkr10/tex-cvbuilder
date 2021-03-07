@@ -24,7 +24,7 @@
 \renewcommand{\footrulewidth}{0pt}
 \fancyhead[C]{%
     \begin{tikzpicture}[remember picture,overlay]
-        \node [rectangle, fill=sidebarbackground, anchor=north west, minimum width=4cm, minimum height=\paperheight+2cm] (box) at ($(current page.north west)-(1cm,-1cm)$) {};
+        \node [rectangle, fill=sidebarbackground, anchor=north west, minimum width=4cm, minimum height=\paperheight+2cm] at ($(current page.north west)-(1cm,-1cm)$) {};
     \end{tikzpicture}
 }
 
@@ -32,31 +32,34 @@
 \AtBeginDocument{\colorlet{defaultcolor}{.}}
 \color{bodytext}
 
-% Layout for name, job title and sidebar
+% Layout for name, job title and side
 \newcommand{\makeprofile}{
-    \begin{spacing}{2}
-        {\sname\name}
+     \begin{spacing}{2}
+        \begin{tikzpicture}[remember picture,overlay,execute at begin node=\setstretch{2}]
+            \node [rectangle, anchor=west, align=left, minimum width=\textwidth, minimum height=4cm] at ($(current page.north)-(8.40cm,3cm)$) {%
+                {\sname\name}\\[\medskipamount]
 
-        \medskip
-        {\sjobtitle\jobtitle}
+                {\sjobtitle\jobtitle}
+            };
+        \end{tikzpicture}
     \end{spacing}
 }
 
 \newcommand{\makecontact}{%
-    \vspace*{.5cm}
-    \noindent{\color{linecolor}{\rule{\textwidth}{1pt}}}
-    \renewcommand{\arraystretch}{1.2}%
-    \begin{center}
-        \begin{tabularx}{\textwidth}{CCC}
-            \ifthenelse{\equal{\location}{}}{}{\locicon\ \location } &
-            \ifthenelse{\equal{\phone}{}}{}{\phoneicon\ \phone } &
-            \ifthenelse{\equal{\mail}{}}{}{\mailicon\ \href{mailto:\mail}{\mail} } \\
-        \end{tabularx}
-    \end{center}
+    \begin{tikzpicture}[remember picture, overlay, ampersand replacement=\&]
+        \node [rectangle, anchor=west, text width=\textwidth, minimum width=\textwidth, inner ysep=10pt, minimum height=1.5cm] (contact) at ($(current page.north)-(6.5cm,6cm)$) {%
+            \begin{tabularx}{\textwidth}{CCC}%
+                \ifthenelse{\equal{\location}{}}{}{\locicon\ \location } &
+                \ifthenelse{\equal{\phone}{}}{}{\phoneicon\ \phone } &
+                \ifthenelse{\equal{\mail}{}}{}{\mailicon\ \href{mailto:\mail}{\mail} } \\
+            \end{tabularx}
+        };
+        \draw[line width=1pt, draw=linecolor] ($(contact.north west)$) -- ($(contact.north east)$);
+        \draw[line width=1pt, draw=linecolor] ($(contact.south west)$) -- ($(contact.south east)$);
+    \end{tikzpicture}
 
-    \noindent{\color{linecolor}{\rule{\textwidth}{1pt}}}
     \letterspace
 }
 
 % Margins
-\RequirePackage[left=4cm, right=1.5cm, top=1.5cm, bottom=1.5cm, footskip=0.5cm, headheight=0.5cm]{geometry}
+\RequirePackage[left=4cm, right=1.5cm, top=6cm, bottom=1.5cm, footskip=0.5cm, headheight=0.5cm]{geometry}
