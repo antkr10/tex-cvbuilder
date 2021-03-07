@@ -47,6 +47,7 @@ Cycle through supported themes by changing the `\theme{<theme>}` variable at the
 * `blue`
 * `bw`
 * `coral`
+* `framed`
 * `gray`
 * `minimal`
 
@@ -54,5 +55,6 @@ Cycle through supported themes by changing the `\theme{<theme>}` variable at the
 ![blue](previews/blue.png)
 ![bw](previews/bw.png)
 ![coral](previews/coral.png)
+![framed](previews/framed.png)
 ![gray](previews/gray.png)
 ![minimal](previews/minimal.png)
