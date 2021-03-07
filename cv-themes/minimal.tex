@@ -40,7 +40,7 @@
     \renewcommand{\footrulewidth}{0pt}
     \fancyhead[C]{%
         \begin{tikzpicture}[remember picture,overlay]
-            \draw [line width=3pt, color=linecolor] ($(current page.north west)-(0,5cm)$) -- ($(current page.north east)-(0,5cm)$);
+            \draw [line width=3pt, color=linecolor] ($(current page.north west)-(0,5.5cm)$) -- ($(current page.north east)-(0,5.5cm)$);
             \draw [line width=1pt, color=linecolor] ($(current page.north west)+(7cm,-6.25cm)$) -- ($(current page.south west)+(7cm,1cm)$);
         \end{tikzpicture}
     }
@@ -63,15 +63,16 @@
 
 \newcommand{\makeprofile}{
     \thispagestyle{firstpagestyle}
-    \begin{center}
-        \begin{spacing}{2}
-            {\sname\name}
+     \begin{spacing}{2}
+        \begin{tikzpicture}[remember picture,overlay,execute at begin node=\setstretch{2}]
+            \node [rectangle, anchor=north, align=center, minimum width=\textwidth, minimum height=4cm] at ($(current page.north)-(0cm,1cm)$) {%
+                {\sname\name}\\[\medskipamount]
 
-            \medskip
-            {\sjobtitle\jobtitle}
-        \end{spacing}
-    \end{center}
-    \vspace*{1cm}
+                {\sjobtitle\jobtitle}
+            };
+        \end{tikzpicture}
+    \end{spacing}
+    \vspace*{3.5cm}
 }
 
 % Margins
