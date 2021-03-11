@@ -18,6 +18,10 @@ RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz; \
 
 # set up working directory and used volume
 ENV PATH="/usr/local/texlive/2020/bin/x86_64-linux:${PATH}"
-RUN tlmgr install xetex etoolbox xifthen ifmtarg microtype fontspec pgf parskip setspace multirow fontawesome5 progressbar titlesec enumitem tcolorbox environ listings paracol booktabs pagecolor lipsum
+RUN wget http://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh; \
+    chmod +x update-tlmgr-latest.sh; \
+    /update-tlmgr-latest.sh; \
+    rm /update-tlmgr-latest.sh; \
+    tlmgr install xetex etoolbox xifthen ifmtarg microtype fontspec pgf parskip setspace multirow fontawesome5 progressbar titlesec enumitem tcolorbox environ listings paracol booktabs pagecolor lipsum xkeyval collectbox adjustbox
 ENV HOME /tex-cvbuilder
 WORKDIR /tex-cvbuilder
