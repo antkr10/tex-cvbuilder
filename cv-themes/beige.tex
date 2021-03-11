@@ -30,7 +30,7 @@
 
 % Defining font styles
 \newcommand{\sname}{\color{name}\fontsize{46pt}{46pt}\sffamily\addfontfeature{LetterSpace=3}\MakeUppercase}
-\newcommand{\sjobtitle}{\color{jobtitle}\fontsize{22}{22}\sffamily\addfontfeature{LetterSpace=10}\MakeUppercase}
+\newcommand{\sjobtitle}{\color{jobtitle}\fontsize{22pt}{22pt}\sffamily\addfontfeature{LetterSpace=5}\MakeUppercase}
 
 % Defining page styles
 \pagestyle{fancy}
@@ -60,25 +60,32 @@
 \columncolor{sidebartext}[0]
 \columncolor{bodytext}[1]
 
-\newcommand{\makeprofile}{
-    \thispagestyle{firstpagestyle}
+\newcommand{\makeprofile}{%
+    \vspace*{-1.5cm}
     \begin{center}
-        \begin{spacing}{2}
+        \thispagestyle{firstpagestyle}
+        {\setstretch{3}
+        \begin{adjustbox}{minipage=[c][2.5cm]{.9\textwidth}}
+            \centering
             {\sname\name}
+        \end{adjustbox}}
 
-            \medskip
+        {\setstretch{1.8}
+        \begin{adjustbox}{minipage=[c][1.5cm]{.9\textwidth}}
+            \centering
             {\sjobtitle\jobtitle}
-        \end{spacing}
+        \end{adjustbox}}
     \end{center}
+    \bigskip
 }
 
 % Margins
 \RequirePackage[left=1cm, right=1cm, top=1.5cm, bottom=1.5cm, footskip=0.5cm, headheight=0.5cm]{geometry}
 
 % Personal skills bar
-\newcommand\perskills[1]{
+\newcommand\perskills[1]{%
     \ifthenelse{\equal{#1}{}}{\booltrue{perempty}}{\renewcommand{\perskills}{%
-        \foreach [count=\i] \x/\y in {#1}{
+        \foreach [count=\i] \x/\y in {#1}{%
             {\x}\\
             \progressbar[width=.9\columnwidth,roundnessa=1pt, ticksheight=0, heightr=1, linecolor=bodytext, filledcolor=bodytext, borderwidth=1pt, emptycolor=pagebackground]{\y}\par\smallskip
         }
@@ -86,9 +93,9 @@
 }
 
 % Professional skills bar
-\newcommand\proskills[1]{
+\newcommand\proskills[1]{%
     \ifthenelse{\equal{#1}{}}{\booltrue{proempty}}{\renewcommand{\proskills}{%
-        \foreach [count=\i] \x/\y in {#1}{
+        \foreach [count=\i] \x/\y in {#1}{%
             {\x}\\
             \progressbar[width=.9\columnwidth,roundnessa=1pt, ticksheight=0, heightr=1, linecolor=bodytext, filledcolor=bodytext, borderwidth=1pt, emptycolor=pagebackground]{\y}\par\smallskip
         }

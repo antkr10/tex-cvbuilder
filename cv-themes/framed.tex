@@ -1,5 +1,5 @@
 % Colors
-\definecolor{pagebackground}{HTML}{FEFEFA}
+\definecolor{pagebackground}{HTML}{FFFFFF}
 \definecolor{sidebarbackground}{HTML}{ECEAEA}
 \definecolor{sidebartitle}{HTML}{564E4E}
 \definecolor{sidebartext}{HTML}{564E4E}
@@ -30,8 +30,8 @@
 \titlespacing*{\subsubsection}{0pt}{0.5cm}{0.1cm}
 
 % Defining font styles
-\newcommand{\sname}{\color{name}\fontsize{36pt}{36pt}\sffamily\addfontfeature{LetterSpace=2}\MakeUppercase}
-\newcommand{\sjobtitle}{\color{jobtitle}\fontsize{22pt}{22pt}\sffamily\addfontfeature{LetterSpace=5}\MakeUppercase}
+\newcommand{\sname}{\color{name}\fontsize{40pt}{40pt}\sffamily\addfontfeature{LetterSpace=3}\MakeUppercase}
+\newcommand{\sjobtitle}{\color{jobtitle}\fontsize{20pt}{20pt}\sffamily\addfontfeature{LetterSpace=5}\MakeUppercase}
 
 % Defining page styles
 \pagestyle{fancy}
@@ -40,7 +40,7 @@
 \renewcommand{\footrulewidth}{0pt}
 \fancyhead[C]{%
     \begin{tikzpicture}[remember picture,overlay]
-        \node [rectangle, fill=sidebarbackground, anchor=north west, minimum width=8cm, minimum height=\paperheight+2cm] (box) at ($(current page.north west)-(1cm,-1cm)$) {};
+        \node [rectangle, fill=sidebarbackground, anchor=north west, minimum width=8cm, minimum height=\paperheight+2cm] at ($(current page.north west)-(1cm,-1cm)$) {};
         \draw [line width=1pt, color=linecolor] ($(current page.north west)+(7cm,2cm)$) -- ($(current page.south west)+(7cm,-2cm)$);
     \end{tikzpicture}
 }
@@ -52,28 +52,32 @@
 \columncolor{bodytext}[1]
 
 \newcommand{\makeprofile}{%
-    \begin{paracol}{2}
-        \switchcolumn[1]
-            \ifthenelse{\equal{\profilepic}{}}{}{
-                \begin{tikzpicture}[remember picture,overlay]
-                    \node[rectangle, minimum height=4cm, minimum width=4cm, path picture={
-                    \node at (path picture bounding box.center){\includegraphics[width=4cm]{\profilepic}};}] at ($(current page.north west)+(3.5cm,-2.5cm)$) {};
-                \end{tikzpicture}
-            }
+    \vspace*{-1.5cm}
+    \begin{center}
+        {\setstretch{3}
+        \begin{adjustbox}{padding=6.35cm 0pt 0pt 0pt,minipage=[c][2.5cm]{12cm}}
+            {\sname\name}
+        \end{adjustbox}}
 
-            \hspace{-9.5cm}% Find a non-overlay way without ugly hspace
-            \begin{tikzpicture}[remember picture,execute at begin node=\setstretch{2}]
-                \node [rectangle, anchor=west, align=left, text width=12cm, minimum width=12cm, minimum height=2.5cm] (name) {\sname\name};
-                \node [rectangle, line width=1pt, below=of name, yshift=.5cm, draw=bodytext, fill=pagebackground, align=left, text width=12cm, minimum width=\paperwidth+10cm, below, inner ysep=10pt] (title) {\sjobtitle\jobtitle};
-            \end{tikzpicture}
-    \end{paracol}
+        {\setstretch{1.8}
+        \begin{adjustbox}{padding=6.35cm 0pt 0pt 0pt,minipage=[c][1.5cm]{12cm}}
+            {\sjobtitle\jobtitle}
+        \end{adjustbox}}
+    \end{center}
+    \bigskip
+    \ifthenelse{\equal{\profilepic}{}}{}{%
+        \begin{tikzpicture}[remember picture,overlay]
+            \node[rectangle, minimum height=4cm, minimum width=4cm, path picture={
+                \node at (path picture bounding box.center){\includegraphics[width=4cm]{\profilepic}};}] at ($(current page.north west)+(3.5cm,-3cm)$) {};
+        \end{tikzpicture}
+    }
 }
 
 % Margins
 \RequirePackage[left=1cm, right=1cm, top=1.5cm, bottom=1.5cm, footskip=0.5cm, headheight=0.5cm]{geometry}
 
 % Personal skills bar
-\newcommand\perskills[1]{
+\newcommand\perskills[1]{%
     \ifthenelse{\equal{#1}{}}{\booltrue{perempty}}{\renewcommand{\perskills}{%
         \foreach [count=\i] \x/\y in {#1}{
             {\x}\\
@@ -87,11 +91,11 @@
 }
 
 % Professional skills bar
-\newcommand\proskills[1]{
+\newcommand\proskills[1]{%
     \ifthenelse{\equal{#1}{}}{\booltrue{proempty}}{\renewcommand{\proskills}{%
-        \foreach [count=\i] \x/\y in {#1}{
+        \foreach [count=\i] \x/\y in {#1}{%
             {\x}\\
-            \ifthenelse{\equal{\thecolumn}{0}}{
+            \ifthenelse{\equal{\thecolumn}{0}}{%
                 \progressbar[width=.9\columnwidth,roundnessa=1pt, ticksheight=0, heightr=1, linecolor=linecolor, filledcolor=sidebartext, borderwidth=1pt, emptycolor=sidebarbackground]{\y}\par\smallskip
                 }{
                 \progressbar[width=.9\columnwidth,roundnessa=1pt, ticksheight=0, heightr=1, linecolor=bodytext, filledcolor=bodytext, borderwidth=1pt, emptycolor=pagebackground]{\y}\par\smallskip

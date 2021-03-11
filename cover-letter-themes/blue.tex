@@ -14,7 +14,7 @@
 
 % Defining font styles
 \newcommand{\sname}{\color{name}\fontsize{46pt}{46pt}\sffamily\addfontfeature{LetterSpace=3}\MakeUppercase}
-\newcommand{\sjobtitle}{\color{jobtitle}\fontsize{22pt}{22pt}\sffamily\addfontfeature{LetterSpace=10}\MakeUppercase}
+\newcommand{\sjobtitle}{\color{jobtitle}\fontsize{22pt}{22pt}\sffamily\addfontfeature{LetterSpace=5}\MakeUppercase}
 
 % Defining page styles
 \pagestyle{fancy}
@@ -32,21 +32,27 @@
 \color{bodytext}
 
 % Layout for name, job title and sidebar
-\newcommand{\makeprofile}{
-     \begin{spacing}{2}
-        \begin{tikzpicture}[remember picture,overlay,execute at begin node=\setstretch{2}]
-            \node [rectangle, anchor=north, align=center, minimum width=\textwidth, minimum height=4cm] at ($(current page.north)-(0cm,1cm)$) {%
-                {\sname\name}\\[\medskipamount]
+\newcommand{\makeprofile}{%
+    \vspace*{-1.5cm}
+    \begin{center}
+        {\setstretch{3}
+        \begin{adjustbox}{minipage=[c][2.5cm]{.9\textwidth}}
+            \centering
+            {\sname\name}
+        \end{adjustbox}}
 
-                {\sjobtitle\jobtitle}
-            };
-        \end{tikzpicture}
-    \end{spacing}
+        {\setstretch{1.8}
+        \begin{adjustbox}{minipage=[c][1.5cm]{.9\textwidth}}
+            \centering
+            {\sjobtitle\jobtitle}
+        \end{adjustbox}}
+    \end{center}
+    \bigskip
 }
 
 \newcommand{\makecontact}{%
-    \begin{tikzpicture}[remember picture, overlay, ampersand replacement=\&]
-        \node [rectangle, line width=1pt, anchor=north, minimum width=\textwidth, minimum height=1.5cm] (contact) at ($(current page.north)-(0cm,5.5cm)$) {%
+    \begin{tikzpicture}[ampersand replacement=\&]
+        \node [rectangle, anchor=north, text width=\textwidth, minimum width=\textwidth, inner ysep=10pt, inner xsep=0pt, minimum height=1.5cm] (contact) at ($(current page.north)-(0cm,5.5cm)$) {%
             \begin{tabularx}{\textwidth}{CCC}%
                 \ifthenelse{\equal{\location}{}}{}{\locicon\ \location } &
                 \ifthenelse{\equal{\phone}{}}{}{\phoneicon\ \phone } &
@@ -55,9 +61,8 @@
         };
         \draw[line width=1pt, draw=linecolor] ($(contact.south west)$) -- ($(contact.south east)$);
     \end{tikzpicture}
-
-    \letterspace
+    \vspace{2\bigskipamount}
 }
 
 % Margins
-\RequirePackage[left=1.5cm, right=1.5cm, top=6cm, bottom=1.5cm, footskip=0.5cm, headheight=0.5cm]{geometry}
+\RequirePackage[left=1.5cm, right=1.5cm, top=1.5cm, bottom=1.5cm, footskip=0.5cm, headheight=0.5cm]{geometry}

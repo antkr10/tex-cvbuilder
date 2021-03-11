@@ -31,7 +31,7 @@
 
 % Defining font styles
 \newcommand{\sname}{\color{name}\fontsize{46pt}{46pt}\sffamily\addfontfeature{LetterSpace=3}\MakeUppercase}
-\newcommand{\sjobtitle}{\color{jobtitle}\fontsize{18pt}{18pt}\sffamily\addfontfeature{LetterSpace=2}\MakeUppercase}
+\newcommand{\sjobtitle}{\color{jobtitle}\fontsize{22pt}{22pt}\sffamily\addfontfeature{LetterSpace=5}\MakeUppercase}
 
 % Defining page styles
 \pagestyle{fancy}
@@ -41,7 +41,7 @@
     \renewcommand{\footrulewidth}{0pt}
     \fancyhead[C]{%
         \begin{tikzpicture}[remember picture,overlay]
-            \node [rectangle, fill=sidebarbackground, anchor=north west, minimum width=8cm, minimum height=\paperheight+2cm] (box) at ($(current page.north west)-(1cm,5cm)$) {};
+            \node [rectangle, fill=sidebarbackground, anchor=north west, minimum width=8cm, minimum height=\paperheight+2cm] at ($(current page.north west)-(1cm,5.5cm)$) {};
         \end{tikzpicture}
     }
 }
@@ -51,7 +51,7 @@
 \renewcommand{\footrulewidth}{0pt}
 \fancyhead[C]{%
     \begin{tikzpicture}[remember picture,overlay]
-        \node [rectangle, fill=sidebarbackground, anchor=north west, minimum width=8cm, minimum height=\paperheight+2cm] (box) at ($(current page.north west)-(1cm,-1cm)$) {};
+        \node [rectangle, fill=sidebarbackground, anchor=north west, minimum width=8cm, minimum height=\paperheight+2cm] at ($(current page.north west)-(1cm,-1cm)$) {};
     \end{tikzpicture}
 }
 
@@ -62,16 +62,22 @@
 \columncolor{bodytext}[1]
 
 \newcommand{\makeprofile}{
-    \thispagestyle{firstpagestyle}
+    \vspace*{-1.5cm}
     \begin{center}
-        \begin{spacing}{2}
+        \thispagestyle{firstpagestyle}
+        {\setstretch{3}
+        \begin{adjustbox}{minipage=[c][2.5cm]{.9\textwidth}}
+            \centering
             {\sname\name}
+        \end{adjustbox}}
 
-            \medskip
+        {\setstretch{1.8}
+        \begin{adjustbox}{minipage=[c][1.5cm]{.9\textwidth}}
+            \centering
             {\sjobtitle\jobtitle}
-        \end{spacing}
+        \end{adjustbox}}
     \end{center}
-    \vspace*{0.5cm}
+    \bigskip
 }
 
 % Margins

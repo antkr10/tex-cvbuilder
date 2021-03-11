@@ -30,8 +30,8 @@
 \titlespacing*{\subsubsection}{0pt}{0.5cm}{0.1cm}
 
 % Defining font styles
-\newcommand{\sname}{\color{name}\fontsize{40pt}{40pt}\sffamily\addfontfeature{LetterSpace=2}\MakeUppercase}
-\newcommand{\sjobtitle}{\color{jobtitle}\fontsize{18pt}{18pt}\sffamily\addfontfeature{LetterSpace=2}\MakeUppercase}
+\newcommand{\sname}{\color{name}\fontsize{40pt}{40pt}\sffamily\addfontfeature{LetterSpace=3}\MakeUppercase}
+\newcommand{\sjobtitle}{\color{jobtitle}\fontsize{20pt}{20pt}\sffamily\addfontfeature{LetterSpace=5}\MakeUppercase}
 
 % Defining page styles
 \pagestyle{fancy}
@@ -41,7 +41,7 @@
 \renewcommand{\footrulewidth}{0pt}
 \fancyhead[C]{%
     \begin{tikzpicture}[remember picture,overlay]
-        \node [rectangle, fill=sidebarbackground, anchor=north west, minimum width=8cm, minimum height=\paperheight+2cm] (box) at ($(current page.north west)-(1cm,-1cm)$) {};
+        \node [rectangle, fill=sidebarbackground, anchor=north west, minimum width=8cm, minimum height=\paperheight+2cm] at ($(current page.north west)-(1cm,-1cm)$) {};
     \end{tikzpicture}
 }
 
@@ -52,23 +52,23 @@
 \columncolor{bodytext}[1]
 
 \newcommand{\makeprofile}{
-    \begin{paracol}{2}
-        \switchcolumn[1]
-        \begin{spacing}{2}
-            {\sname\name}
+    \vspace*{-1.5cm}
+    {\setstretch{3}
+    \begin{adjustbox}{padding=6.55cm 0pt 0pt 0pt,minipage=[c][2.5cm]{12cm}}
+        {\sname\name}
+    \end{adjustbox}}
 
-            \medskip
-            {\sjobtitle\jobtitle}
-        \end{spacing}
-
-        \ifthenelse{\equal{\profilepic}{}}{}{
-            \begin{tikzpicture}[remember picture,overlay]
-                \node[circle,minimum width=4cm, path picture={
-                    \node at (path picture bounding box.center){\includegraphics[width=4cm]{\profilepic}};}] at ($(current page.north west)+(3.5cm,-3cm)$) {};
-            \end{tikzpicture}
-        }
-    \end{paracol}
-    \vspace*{1cm}
+    {\setstretch{1.8}
+    \begin{adjustbox}{padding=6.55cm 0pt 0pt 0pt,minipage=[c][1.5cm]{12cm}}
+        {\sjobtitle\jobtitle}
+    \end{adjustbox}}
+    \bigskip
+    \ifthenelse{\equal{\profilepic}{}}{}{
+        \begin{tikzpicture}[remember picture,overlay]
+            \node[circle,minimum width=4cm, path picture={
+                \node at (path picture bounding box.center){\includegraphics[width=4cm]{\profilepic}};}] at ($(current page.north west)+(3.5cm,-3cm)$) {};
+        \end{tikzpicture}
+    }
 }
 
 % Margins
