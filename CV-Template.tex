@@ -6,9 +6,9 @@
 %	 THEMES
 %----------------------------------------------------------------------------------------
 
-% Define the desired theme out of the following: beige, blue, bw, coral, framed, gray, minimal
+% Define the desired theme out of the following: beige, blue, bw, coral, framed, gray, minimal, onyx
 % See screenshots in preview/ directory
-\theme{beige}
+\theme{onyx}
 
 %----------------------------------------------------------------------------------------
 %	 PERSONAL INFORMATION
@@ -58,17 +58,18 @@
 %----------------------------------------------------------------------------------------
 % Use \subsection inside the sidebar
 
-\subsection{CONTACT}
-\makecontact % Print defined contact information
+% Print defined contact information
+% \makecontact{NAME FOR CONTACT SECTION}
+\makecontact{CONTACT}
 
-\subsection{DATE OF BIRTH}
-\makedob
+% \makelicense{NAME FOR DATE OF BIRTH SECTION}
+\makedob{DATE OF BIRTH}
 
-\subsection{ABOUT ME}
-\makeabout
+% \makelicense{NAME FOR ABOUT ME SECTION}
+\makeabout{ABOUT ME}
 
-\subsection{DRIVING LICENSE}
-\makelicense
+% \makelicense{NAME FOR DRIVING LICENSE SECTION}
+\makelicense{DRIVING LICENSE}
 
 \subsection{LANGUAGES}
 \langcircles % Command for drawing language skill circles

@@ -50,6 +50,7 @@ Cycle through supported themes by changing the `\theme{<theme>}` variable at the
 * `framed`
 * `gray`
 * `minimal`
+* `onyx`
 
 ![beige](previews/beige.png)
 ![blue](previews/blue.png)
@@ -58,3 +59,4 @@ Cycle through supported themes by changing the `\theme{<theme>}` variable at the
 ![framed](previews/framed.png)
 ![gray](previews/gray.png)
 ![minimal](previews/minimal.png)
+![onyx](previews/onyx.png)

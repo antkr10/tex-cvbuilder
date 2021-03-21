@@ -8,6 +8,7 @@
 \newbool{langempty}
 \newbool{proempty}
 \newbool{perempty}
+\newbool{altcont}
 
 \newcommand{\theme}[1]{
     \ifthenelse{\equal{\detokenize{#1}}{\detokenize{bw}}}{
@@ -24,6 +25,9 @@
         \input{cv-themes/coral.tex}}{}
     \ifthenelse{\equal{\detokenize{#1}}{\detokenize{framed}}}{
         \input{cv-themes/framed.tex}}{}
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{onyx}}}{
+        \booltrue{altcont}
+        \input{cv-themes/onyx.tex}}{}
 }
 
 %----------------------------------------------------------------------------------------
@@ -92,10 +96,19 @@
 \newcommand{\linkedin}[1]{\renewcommand{\linkedin}{#1}}
 \newcommand{\dateofbirth}[1]{\renewcommand{\dateofbirth}{#1}}
 \newcommand{\profilepic}[1]{\renewcommand{\profilepic}{#1}}
-\newcommand{\aboutme}[1]{\renewcommand{\aboutme}{#1}}
-\newcommand{\makeabout}{\ifthenelse{\equal{\aboutdesc}{}}{}{\aboutdesc}}
-\newcommand{\makedob}{\ifthenelse{\equal{\dateofbirth}{}}{}{\dateofbirth}}
-\newcommand{\makelicense}{\ifthenelse{\equal{\drivinglicenses}{}}{}{\drivinglicenses}}
+\newcommand{\makeabout}[1]{\ifthenelse{\equal{\aboutdesc}{}}{}{%
+    \subsection{#1}
+
+    \aboutdesc}}
+\newcommand{\makedob}[1]{\ifthenelse{\equal{\dateofbirth}{}}{}{%
+    \ifboolexpr{bool {altcont}}{}{%
+    \subsection{#1}
+
+    \dateofbirth}}}
+\newcommand{\makelicense}[1]{\ifthenelse{\equal{\drivinglicenses}{}}{}{%
+    \subsection{#1}
+
+    \drivinglicenses}}
 \newcommand{\langcircles}{\ifboolexpr{bool {langempty}}{}{\langskills}}
 \newcommand{\sitemtit}{\color{bodytext}\sffamily\MakeUppercase}
 \newcommand{\sitemsub}{\color{bodytext}\normalfont\itshape}
@@ -106,10 +119,12 @@
 \newcommand{\mailicon}{\faEnvelope}
 \newcommand{\githubicon}{\faGithub}
 \newcommand{\linkedinicon}{\faLinkedin}
+\newcommand{\calendaricon}{\faCalendar*}
 
 % Table column types
-\newcolumntype{Y}[1]{>{\arraybackslash\centering}m{#1}}
+\newcolumntype{Y}[1]{>{\centering\arraybackslash}m{#1}}
 \newcolumntype{L}[1]{>{\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
 
 % CEFR description
 \newcommand{\cefrdesc}{
@@ -140,14 +155,19 @@
 }
 
 % Contact table
-\newcommand{\makecontact}{\vspace{-5pt}\renewcommand{\arraystretch}{1.2}%
-    \begin{tabular}[t]{@{}Y{.1\columnwidth} @{\hskip 0.05\columnwidth}p{0.85\columnwidth}}
-        \ifthenelse{\equal{\location}{}}{}{\locicon & \location \\ }
-        \ifthenelse{\equal{\phone}{}}{}{\phoneicon & \phone \\ }
-        \ifthenelse{\equal{\mail}{}}{}{\mailicon & \href{mailto:\mail}{\mail} }
-        \ifthenelse{\equal{\linkedin}{}}{}{\\ \linkedinicon & \linkedin }
-        \ifthenelse{\equal{\github}{}}{}{\\ \githubicon & \github \\ }
-    \end{tabular}
+\newcommand{\makecontact}[1]{%
+    \ifboolexpr{bool {altcont}}{}{%
+        \subsection{#1}
+
+        \renewcommand{\arraystretch}{1.2}
+        \begin{tabular}[t]{@{}Y{.1\columnwidth} @{\hskip 0.05\columnwidth}p{0.85\columnwidth}}
+            \ifthenelse{\equal{\location}{}}{}{\locicon & \location \\ }
+            \ifthenelse{\equal{\phone}{}}{}{\phoneicon & \phone \\ }
+            \ifthenelse{\equal{\mail}{}}{}{\mailicon & \href{mailto:\mail}{\mail} }
+            \ifthenelse{\equal{\linkedin}{}}{}{\\ \linkedinicon & \linkedin }
+            \ifthenelse{\equal{\github}{}}{}{\\ \githubicon & \github \\ }
+        \end{tabular}
+    }
 }
 
 % Environment for listing out work experience and education

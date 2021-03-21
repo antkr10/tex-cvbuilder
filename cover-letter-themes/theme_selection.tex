@@ -24,6 +24,8 @@
         \input{cover-letter-themes/coral.tex}}{}
     \ifthenelse{\equal{\detokenize{#1}}{\detokenize{framed}}}{
         \input{cover-letter-themes/framed.tex}}{}
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{onyx}}}{
+        \input{cover-letter-themes/onyx.tex}}{}
 }
 
 %----------------------------------------------------------------------------------------
@@ -105,7 +107,7 @@
 \newcommand{\linkedinicon}{\faLinkedin}
 
 % Defining table column types
-\newcolumntype{Y}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{Y}[1]{>{\arraybackslash\centering}m{#1}}
 \newcolumntype{R}[1]{>{\arraybackslash\raggedright}m{#1}}
 \newcolumntype{C}{>{\centering\arraybackslash}X}
 \newcolumntype{L}[1]{>{\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
