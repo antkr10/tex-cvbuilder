@@ -9,6 +9,7 @@
 \newbool{proempty}
 \newbool{perempty}
 \newbool{altcont}
+\newbool{reverse}
 
 \newcommand{\theme}[1]{
     \ifthenelse{\equal{\detokenize{#1}}{\detokenize{bw}}}{
@@ -28,6 +29,9 @@
     \ifthenelse{\equal{\detokenize{#1}}{\detokenize{onyx}}}{
         \booltrue{altcont}
         \input{cv-themes/onyx.tex}}{}
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{plain}}}{
+        \booltrue{reverse}
+        \input{cv-themes/plain.tex}}{}
 }
 
 %----------------------------------------------------------------------------------------
@@ -79,6 +83,25 @@
 
 % Graphics directories
 \graphicspath{{../images/}{images/}}
+
+\newcommand{\begincols}{%
+    \ifboolexpr{bool{reverse}}{%
+        \begin{paracol}{2}%
+        \switchcolumn[1]
+        }{%
+        \begin{paracol}{2}%
+    }
+}
+
+\newcommand{\switchcols}{%
+    \ifboolexpr{bool{reverse}}{%
+        \switchcolumn[0]%
+        }{%
+        \switchcolumn[1]%
+    }
+}
+
+\newcommand{\fincols}{\end{paracol}}
 
 %----------------------------------------------------------------------------------------
 %	 COMMANDS

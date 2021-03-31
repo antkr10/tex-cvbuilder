@@ -51,6 +51,7 @@ Cycle through supported themes by changing the `\theme{<theme>}` variable at the
 * `gray`
 * `minimal`
 * `onyx`
+* `plain`
 
 ![beige](previews/beige.png)
 ![blue](previews/blue.png)
@@ -60,3 +61,4 @@ Cycle through supported themes by changing the `\theme{<theme>}` variable at the
 ![gray](previews/gray.png)
 ![minimal](previews/minimal.png)
 ![onyx](previews/onyx.png)
+![plain](previews/plain.png)

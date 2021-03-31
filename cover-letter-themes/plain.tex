@@ -1,0 +1,60 @@
+% Colors
+\definecolor{pagebackground}{HTML}{FFFFFF}
+\definecolor{bodytitle}{HTML}{484849}
+\definecolor{bodytext}{HTML}{484849}
+\definecolor{bulletcolor}{HTML}{484849}
+\definecolor{linkcolor}{HTML}{5F80A0}
+\definecolor{linecolor}{HTML}{484849}
+\definecolor{name}{HTML}{484849}
+\definecolor{jobtitle}{HTML}{484849}
+\RequirePackage[pagecolor=pagebackground, nopagecolor=pagebackground]{pagecolor}
+
+% Defining font styles
+\newcommand{\sname}{\color{name}\fontsize{36pt}{36pt}\sffamily}
+\newcommand{\sjobtitle}{\color{jobtitle}\fontsize{18pt}{18pt}\sffamily\addfontfeature{LetterSpace=2}}
+
+% Defining page styles
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[C]{%
+    \begin{tikzpicture}[remember picture,overlay]
+        \draw [line width=2pt, color=linecolor] ($(current page.north west)+(1,-5cm)$) -- ($(current page.north east)-(5.5,5cm)$);
+        \draw [line width=2pt, color=linecolor] ($(current page.north west)+(15.5cm,-1cm)$) -- ($(current page.south west)+(15.5cm,1cm)$);
+    \end{tikzpicture}
+}
+
+% Default text color
+\AtBeginDocument{\colorlet{defaultcolor}{.}}
+\color{bodytext}
+
+% Layout for name, job title and sidebar
+\newcommand{\makeprofile}{%
+    \vspace*{-1.5cm}
+    {\setstretch{3}
+    \begin{adjustbox}{minipage=[c][2cm]{\textwidth}}
+        {\sname\name}
+    \end{adjustbox}}
+
+    {\setstretch{1.8}
+    \begin{adjustbox}{minipage=[c][1cm]{\textwidth}}
+        {\sjobtitle\jobtitle}
+    \end{adjustbox}}
+    \vspace{3\bigskipamount}
+}
+
+\newcommand{\makecontact}{%
+    \begin{tikzpicture}[remember picture, overlay]
+        \node [anchor=north, minimum width=4cm, inner xsep=0pt] at ($(current page.north east)-(3,2cm)$) {%
+        \begin{tabularx}{4.5cm}{@{}Y{0.9cm} @{\hskip 0.05mm}X}
+            \ifthenelse{\equal{\location}{}}{}{\locicon & \location \\ }
+            \ifthenelse{\equal{\phone}{}}{}{\phoneicon & \phone \\ }
+            \ifthenelse{\equal{\mail}{}}{}{\mailicon & \href{mailto:\mail}{\mail} \\}
+        \end{tabularx}
+        };
+    \end{tikzpicture}
+}
+
+% Margins
+\RequirePackage[left=1cm, right=6.5cm, top=2cm, bottom=1.5cm, footskip=0.5cm, headheight=0.5cm]{geometry}

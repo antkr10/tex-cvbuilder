@@ -6,7 +6,7 @@
 %	 THEMES
 %----------------------------------------------------------------------------------------
 
-% Define the desired theme out of the following: beige, blue, bw, coral, framed, gray, minimal, onyx
+% Define the desired theme out of the following: beige, blue, bw, coral, framed, gray, minimal, onyx, plain
 % See screenshots in preview/ directory
 \theme{beige}
 
@@ -51,7 +51,7 @@
 
 \makeprofile % Print name & job description. Also prints out profile picture if it's supported by the theme
 
-\begin{paracol}{2}
+\begincols
 
 %----------------------------------------------------------------------------------------
 %	 SIDEBAR
@@ -84,7 +84,7 @@
 %	 BODY
 %----------------------------------------------------------------------------------------
 % Use \section inside the body
-\switchcolumn[1] % This command is used to switch to the right column (document body)
+\switchcols % This command is used to switch to the document body
 
 \section{WORK EXPERIENCE}
 
@@ -140,5 +140,5 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 % \skillsbars{NAME FOR PROFESSIONAL SKILLS SECTION}{NAME FOR PROFESSIONAL SKILLS SECTION}
 \skillsbars{PROFESSIONAL}{PERSONAL}
 
-\end{paracol}
+\fincols
 \end{document}
