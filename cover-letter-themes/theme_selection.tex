@@ -10,24 +10,26 @@
 \newbool{perempty}
 
 \newcommand{\theme}[1]{
-    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{bw}}}{
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{bw}}}{%
         \input{cover-letter-themes/bw.tex}}{}
-    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{gray}}}{
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{gray}}}{%
         \input{cover-letter-themes/gray.tex}}{}
-    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{minimal}}}{
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{minimal}}}{%
         \input{cover-letter-themes/minimal.tex}}{}
-    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{blue}}}{
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{blue}}}{%
         \input{cover-letter-themes/blue.tex}}{}
-    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{beige}}}{
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{beige}}}{%
         \input{cover-letter-themes/beige.tex}}{}
-    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{coral}}}{
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{coral}}}{%
         \input{cover-letter-themes/coral.tex}}{}
-    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{framed}}}{
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{framed}}}{%
         \input{cover-letter-themes/framed.tex}}{}
-    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{onyx}}}{
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{onyx}}}{%
         \input{cover-letter-themes/onyx.tex}}{}
-    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{plain}}}{
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{plain}}}{%
         \input{cover-letter-themes/plain.tex}}{}
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{earth}}}{%
+        \input{cover-letter-themes/earth.tex}}{}
 }
 
 %----------------------------------------------------------------------------------------

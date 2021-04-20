@@ -12,26 +12,29 @@
 \newbool{reverse}
 
 \newcommand{\theme}[1]{
-    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{bw}}}{
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{bw}}}{%
         \input{cv-themes/bw.tex}}{}
-    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{gray}}}{
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{gray}}}{%
         \input{cv-themes/gray.tex}}{}
-    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{minimal}}}{
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{minimal}}}{%
         \input{cv-themes/minimal.tex}}{}
-    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{blue}}}{
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{blue}}}{%
         \input{cv-themes/blue.tex}}{}
-    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{beige}}}{
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{beige}}}{%
         \input{cv-themes/beige.tex}}{}
-    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{coral}}}{
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{coral}}}{%
         \input{cv-themes/coral.tex}}{}
-    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{framed}}}{
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{framed}}}{%
         \input{cv-themes/framed.tex}}{}
-    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{onyx}}}{
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{onyx}}}{%
         \booltrue{altcont}
         \input{cv-themes/onyx.tex}}{}
-    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{plain}}}{
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{plain}}}{%
         \booltrue{reverse}
         \input{cv-themes/plain.tex}}{}
+    \ifthenelse{\equal{\detokenize{#1}}{\detokenize{earth}}}{%
+        \booltrue{altcont}
+        \input{cv-themes/earth.tex}}{}
 }
 
 %----------------------------------------------------------------------------------------
@@ -86,18 +89,18 @@
 
 \newcommand{\begincols}{%
     \ifboolexpr{bool{reverse}}{%
-        \begin{paracol}{2}%
+        \begin{paracol}{2}
         \switchcolumn[1]
         }{%
-        \begin{paracol}{2}%
+        \begin{paracol}{2}
     }
 }
 
 \newcommand{\switchcols}{%
     \ifboolexpr{bool{reverse}}{%
-        \switchcolumn[0]%
+        \switchcolumn[0]
         }{%
-        \switchcolumn[1]%
+        \switchcolumn[1]
     }
 }
 
@@ -201,7 +204,7 @@
 }
 
 % Environment for listing out projects
-\newenvironment{projitem}[2]{
+\newenvironment{projitem}[2]{%
     {\color{bodytext}{\ifthenelse{\isempty{#2}}{\sitemtit{#1}}{\sitemtit{#1 | #2}}}}\par
     {}
 }
