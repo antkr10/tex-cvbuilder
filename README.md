@@ -24,7 +24,7 @@ This repository comes with a Dockerfile for creating a minimal Tex Live installa
 To build the image, locate to where you cloned this repository and run
 
 ```
-$ docker build -t ubuntu:tex-cvbuilder .
+$ docker build -t ubuntu:tex-cvbuilder docker
 ```
 
 Once the image is built, compile the document using

@@ -22,6 +22,13 @@ RUN wget http://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh; \
     chmod +x update-tlmgr-latest.sh; \
     /update-tlmgr-latest.sh; \
     rm /update-tlmgr-latest.sh; \
-    tlmgr install xetex etoolbox xifthen ifmtarg microtype fontspec pgf parskip setspace multirow fontawesome5 progressbar titlesec enumitem tcolorbox environ listings paracol booktabs pagecolor lipsum xkeyval collectbox adjustbox
+    tlmgr install \
+        xetex etoolbox xifthen ifmtarg \
+        microtype fontspec pgf parskip \
+        setspace multirow fontawesome5 progressbar \
+        titlesec enumitem tcolorbox environ \
+        listings paracol booktabs pagecolor \
+        lipsum xkeyval collectbox adjustbox \
+        tikzfill pdfcol
 ENV HOME /tex-cvbuilder
 WORKDIR /tex-cvbuilder
